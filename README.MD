@@ -19,7 +19,7 @@ For example when decrypting all classes inside a jar file:
 
 `java -jar HasenASM.jar d input.jar output.jar`
 
-Or when encrypting a singular class to run on Clientlauncher JDK:
+Or when encrypting a jar to run on Clientlauncher JDK:
 
 `java -jar HasenASM.jar e input.jar output.jar`
 
