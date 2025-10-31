@@ -1,0 +1,10 @@
+iadd -> ixor
+idiv -> ineg
+irem -> iushr
+ineg -> idiv
+ishl -> irem
+ishr -> iand
+iushr -> ishl
+iand -> ishr
+ior -> iadd
+ixor -> ior
