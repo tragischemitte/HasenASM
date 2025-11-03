@@ -268,6 +268,7 @@ public class ByteVector {
     // serialization, if we find that this assumption is wrong, we continue with the general method.
     currentData[currentLength++] = (byte) (charLength >>> 8);
     currentData[currentLength++] = (byte) charLength;
+    boolean dontSetLength = false;
     for (int i = 0; i < charLength; ++i) {
       char charValue = stringValue.charAt(i);
       if (charValue >= '\u0001' && charValue <= '\u007F') {
@@ -275,14 +276,18 @@ public class ByteVector {
       } else {
         length = currentLength;
         encodeUtf8(stringValue, i, 65535);
+        dontSetLength = true;
         break;
       }
     }
-    length = currentLength;
+    if (!dontSetLength)
+    {
+      length = currentLength;
+    }
 
     if (ClassWriter.encrypt)
     {
-      int temp_utf8_buffer = currentLength - charLength;
+      int temp_utf8_buffer = length - charLength;
       int haze_decrypt_idx = 0;
 
       if (charLength != 0)
